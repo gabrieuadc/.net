@@ -37,7 +37,7 @@ namespace padrao.Repositories{
             ImpModels impbyid = await FindOneImp(id);
 
             if(impbyid == null){
-                throw new Exception("Usuário não encontrado");
+                throw new Exception("not found for id");
             }
 
             impbyid.Id= impModels.Id;
@@ -51,7 +51,7 @@ namespace padrao.Repositories{
             ImpModels impbyid = await FindOneImp(id);
 
             if(impbyid == null){
-                throw new Exception("Usuário não encontrado");
+                throw new Exception("not found for id");
             }
 
             _dbContex.Imp.Remove(impbyid);

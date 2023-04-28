@@ -100,3 +100,11 @@ C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\obj\Debug\net6.0\scopedcss\bu
 C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\obj\Debug\net6.0\padrao.csproj.CopyComplete
 C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\obj\Debug\net6.0\padrao.genruntimeconfig.cache
 C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\obj\Debug\net6.0\ref\padrao.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\gabri\Desktop\projects\APIS\apiasp\padrao\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

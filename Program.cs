@@ -1,4 +1,9 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using padrao.Authent;
 using padrao.Data;
 using padrao.Repositories;
 using padrao.Repositories.Interfaces;
@@ -19,6 +24,30 @@ builder.Services.AddCors(options =>
                       });
 });
 
+// builder.Services.AddAuthentication("BasicAuthentication")
+//     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+builder.Services.AddAuthentication( x=> 
+{
+    x.DefaultAuthenticateScheme= JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme= JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken= true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1212312fsdfsdf54s6f5s")),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            // ValidateLifetime = true,
+            // ValidIssuer = "suaissuer",
+            // ValidAudience = "suapublico",
+
+        };
+        });
+
 
 // Add services to the container.
 
@@ -26,20 +55,23 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<UsuarioDBContex>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddDbContext<UsuarioDBContex>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
 builder.Services.AddScoped<IUsuariosRepository, UsuarioRepository>();
 
-builder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<ImpostosDBContex>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddDbContext<ImpostosDBContex>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
 builder.Services.AddScoped<IImpostosRepository, ImpostoRepository>();
 
-builder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<ServiceDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddDbContext<ServiceDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddDbContext<CustoDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+
+builder.Services.AddScoped<ICustoRepository, CustoRepository>();
 
 var app = builder.Build();
 
@@ -49,6 +81,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);

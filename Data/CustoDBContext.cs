@@ -4,15 +4,15 @@ using padrao.Models;
 
 namespace padrao.Data{
 
-    public class ImpostosDBContex: DbContext{
+    public class CustoDBContext: DbContext{
 
-        public ImpostosDBContex(DbContextOptions<ImpostosDBContex> options): base (options){}
+        public CustoDBContext(DbContextOptions<CustoDBContext> options): base (options){}
 
 
-    public DbSet<ImpModels> Imp{get;set;}
+    public DbSet<CustoModel> Custo{get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.ApplyConfiguration(new ImpostoMap());
+            modelBuilder.ApplyConfiguration(new CustoMap());
             base.OnModelCreating(modelBuilder);
         }
 

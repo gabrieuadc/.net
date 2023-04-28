@@ -52,6 +52,24 @@ namespace padrao.Controllers
 
         }
 
+        [HttpPost("/login")]
+        public async Task <ActionResult<dynamic>> Login([FromBody] UsuarioModel usuarioModel){
+            try{
+                UsuarioModel usuario= await _usuariorepository.FindById(usuarioModel.Id);
+                if(usuario!= null){
+                    var token = Authent.TokenService.GenerateToken(usuario);
+                    return Ok("Autenticado "+ token);
+                }
+                else{
+                    return StatusCode(StatusCodes.Status404NotFound,"User not found");
+                }
+            }
+            catch(Exception ex){
+                 return StatusCode(StatusCodes.Status502BadGateway,$"Error:{ex.Message}");
+            }
+
+        }
+
 
         [HttpPut("{id}")]
         public async Task <ActionResult<UsuarioModel>> Patch([FromBody] UsuarioModel usuarioModel, int id){

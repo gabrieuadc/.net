@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using padrao.Data;
 using padrao.Models;
 using padrao.Repositories;
 using padrao.Repositories.Interfaces;
@@ -11,9 +13,12 @@ namespace padrao.Controllers{
     public class ImpostosController: ControllerBase{
 
         private readonly IImpostosRepository _impostosRepository;
-        
-        public ImpostosController(IImpostosRepository impostoRepository){
+        private readonly ImpostosDBContex _context;
+
+
+        public ImpostosController(IImpostosRepository impostoRepository, ImpostosDBContex context){
             _impostosRepository = impostoRepository;
+            _context= context;
         }
 
         [HttpGet]
@@ -32,6 +37,19 @@ namespace padrao.Controllers{
             try{
             ImpModels imps= await _impostosRepository.FindOneImp(id);
             return Ok(imps);
+            }
+            catch(Exception ex){
+                return StatusCode(StatusCodes.Status502BadGateway,$"Error:{ex.Message}");
+            }
+
+        }
+
+                // using (var context =new ImpostosDBContex(new DbContextOptions<ImpostosDBContex>()))
+        [HttpGet("/porimp")]
+        public async Task <ActionResult<List<ImpModels>>> FindByExerc(){
+            try{
+                    var teste = _context.Imp.Where(p=> p.exercicio== "2022");
+                    return Ok(teste);
             }
             catch(Exception ex){
                 return StatusCode(StatusCodes.Status502BadGateway,$"Error:{ex.Message}");

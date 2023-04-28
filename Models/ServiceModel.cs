@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace padrao.Models{
 
     public class ServiceModel{
 
+
+        [Key]
         public int id{get;set;}
         [Required]
         public int contact{get;set;}
@@ -12,7 +15,7 @@ namespace padrao.Models{
         [Required]
         public String? service{get;set;}
         [Required]
-        public String? value{get;set;}
+        public int value{get;set;}
         [Required]
         public String? date{get;set;}
 

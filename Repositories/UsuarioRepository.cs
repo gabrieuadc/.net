@@ -28,7 +28,7 @@ namespace padrao.Repositories{
             UsuarioModel usuarioporId= await FindById(id);
 
             if(usuarioporId == null){
-                throw new Exception("Usuário para o id: não foi encontrado.");
+                throw new Exception("User not found for id.");
             }
             usuarioporId.Nome= usuario.Nome;
             _dbContext.Usuarios.Update(usuarioporId);
@@ -41,7 +41,7 @@ namespace padrao.Repositories{
             UsuarioModel usuarioporId = await FindById(id);
 
             if(usuarioporId == null){
-                throw new Exception("Usuario nao encontrado");
+                throw new Exception("User not found for id");
             }
 
             _dbContext.Usuarios.Remove(usuarioporId);
